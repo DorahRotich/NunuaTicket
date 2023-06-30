@@ -18,9 +18,9 @@
   ============================= */
 
   :root {
-    --color-primary: #D73953;
+    --color-primary: #731b9f;
     --color-black:  #090909;
-    --color-white: #ffffff;
+    --color-white: #c6bdbd;
     --color-grey: #a0a0a0;
     --color-light-grey: #f3f3f3;
     --color-dark-grey: #353535;
@@ -333,7 +333,10 @@
     justify-content: space-between;
     align-items: center;
   }
-
+  .header img {
+    height:10rem;
+    margin-bottom: 0%;
+  }
   .header .menu-icon{
       cursor: pointer;
       padding: 2.5rem;
@@ -391,6 +394,11 @@
   
   .footer-address {
     color: var(--text-color);
+  }
+
+  .footer img {
+    height:10rem;
+    margin-right: 20%;
   }
   
   .social-link {
@@ -660,19 +668,25 @@
   
   .card-testimonial {
     text-align: center;
+    color: #efeded;
   }
+
   
   .card-testimonial .card-avatar {
     border-radius: 50%;
-    width: 10rem;
-    height: 10rem;
+    width: 15rem;
+    height: 15rem;
   }
   
   .card-testimonial .card-quote cite {
     display: block;
-    padding-top: 1rem;
+    padding-top: 2rem;
     color: var(--color-primary);
   }
+
+.card-quote cite:hover {
+  color: #dfc127;
+}
   
   .card-testimonial .card-quote {
     position: relative;
@@ -682,10 +696,10 @@
     content: '\201C';
     position: absolute;
     top: -4.5rem;
-    left: -1rem;
-    color: #efeded;
+    left: -2rem;
+    color: #424243;
     font-size: 10rem;
-    z-index: -1;
+    z-index: 0;
   }
   
   /*** ARTICLE PAGE ***/
