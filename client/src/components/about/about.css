@@ -1,0 +1,57 @@
+.section-about-us [class*='col-'] {
+    align-self: center;
+  }
+  .container {
+    width: 100%;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-header {
+    text-align: center;
+    padding: 0 0 3rem;
+  }
+  .section-body {
+    padding: 2rem 0 4rem;
+  }
+  ul.row {
+    margin: -1rem;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .row {
+    display: flex;
+  }
+  .col-1-3 {
+    width: calc((100% / 3) - 4rem);
+  }
+  .card-testimonial {
+    text-align: center;
+  }
+  
+  .card-testimonial .card-avatar {
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+  }
+  
+  .card-testimonial .card-quote cite {
+    display: block;
+    padding-top: 1rem;
+    color: #690aa8;
+  }
+  
+  .card-testimonial .card-quote {
+    position: relative;
+  }
+  
+  .card-testimonial .card-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -4.5rem;
+    left: -1rem;
+    color: #efeded;
+    font-size: 10rem;
+    z-index: -1;
+  }
