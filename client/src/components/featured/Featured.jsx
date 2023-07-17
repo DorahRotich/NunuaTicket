@@ -3,7 +3,8 @@ import "./featured.css";
 
 const Featured = () => {
 
-  const {data, loading, error } = useFetch("http://localhost:8080")
+  const {data, loading, error } = useFetch("http://localhost:8080/api/stadium/countByCity?cities=Nairobi,Kajiado,Thika")
+  console.log(data)
   return (
     <div className="featured">
       {loading ? (
@@ -18,7 +19,7 @@ const Featured = () => {
         />
         <div className="featuredTitles">
           <h1>Nairobi</h1>
-          <h2>{data[0]}</h2>
+          <h2>{data[0]} stadiums</h2>
         </div>
       </div>
       
@@ -30,7 +31,7 @@ const Featured = () => {
         />
         <div className="featuredTitles">
           <h1>Kajiado</h1>
-          <h2>{data[1]}</h2>
+          <h2>{data[1]} stadiums</h2>
         </div>
       </div>
       <div className="featuredItem">
@@ -41,7 +42,7 @@ const Featured = () => {
         />
         <div className="featuredTitles">
           <h1>Thika town</h1>
-          <h2>{data[2]}</h2>
+          <h2>{data[2]} stadiums</h2>
         </div>
       </div>
       </>
