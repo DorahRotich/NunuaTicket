@@ -16,9 +16,9 @@ const Home = () => {
       <div className="homeContainer">
       <h1 className="homeTitle">Featured cities</h1>
         <Featured/>
-        <h1 className="homeTitle">Browse by stadiums</h1>
+        <h1 className="homeTitle">Browse by event type</h1>
         <PropertyList/>
-        <h1 className="homeTitle">Events guests loved</h1>
+        <h1 className="homeTitle">Past events by us</h1>
         <FeaturedProperties/>
         <About/>
         <MailList/>
