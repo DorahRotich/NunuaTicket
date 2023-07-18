@@ -6,6 +6,7 @@ import usersRoute from './routes/users.js'
 import stadiumRoute from './routes/stadium.js'
 import seatRoute from './routes/seat.js'
 import cookieParser from 'cookie-parser'
+import cors from "cors";
 
 const app = express()
 dotenv.config()
@@ -21,8 +22,10 @@ const connect = async () => {
 };
 
 //middlewares
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser());
+
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
