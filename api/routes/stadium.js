@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import { createStadium, updateStadium, deleteStadium, getStadium, getStadiums, countByCity } from '../controllers/stadiumController.js'
+import { createStadium, updateStadium, deleteStadium, getStadium, getStadiums, countByCity, countbyType } from '../controllers/stadiumController.js'
 import { verifyAdmin } from '../utils/verifyToken.js';
 
 const router = express.Router();
@@ -20,6 +20,6 @@ router.get('/find/:id', getStadium);
 router.get('/', getStadiums);
 
 router.get('/countByCity', countByCity);
-router.get('/countByType', getStadiums);
+router.get('/countByType', countbyType);
 
 export default router;
