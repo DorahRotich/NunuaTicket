@@ -1,4 +1,4 @@
-import List from '../../client/src/pages/list/List.jsx'
+import Seat from '../models/seatModel.js'
 import Stadium from '../models/stadiumModel.js'
 
 export const createStadium = async (req, res, next) => {
