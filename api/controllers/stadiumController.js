@@ -33,8 +33,12 @@ export const deleteStadium = async (req, res, next) => {
 }
 
 export const getStadium = async (req, res, next) => {
-    try{
-        const stadium = await Stadium.findById(req.params.id);
+    const { min, max, ...others } = req.query;
+    try {
+        const stadium = await Stadium.find({
+        ...others,
+        cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+        }).limit(req.query.limit);
         res.status(200).json(stadium)
     } catch (error) {
         next(error)
