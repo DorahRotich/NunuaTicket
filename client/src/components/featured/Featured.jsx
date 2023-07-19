@@ -1,5 +1,7 @@
 import useFetch from "../../hooks/useFetch";
+import { Link } from "react-router-dom";
 import "./featured.css";
+import { useNavigate } from "react-router-dom";
 
 const Featured = () => {
 
