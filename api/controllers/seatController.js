@@ -32,6 +32,21 @@ export const updateSeat = async (req, res, next) => {
         next(error)
     }
 };
+export const updateSeatAvailability = async (req, res, next) => {
+    try {
+      await Seat.updateOne(
+        { "seatNumbers._id": req.params.id },
+        {
+          $push: {
+            "seatNumbers.$.unavailableDates": req.body.dates
+          },
+        }
+      );
+      res.status(200).json("Seat status has been updated.");
+    } catch (err) {
+      next(err);
+    }
+  };
 
 export const deleteSeat = async (req, res, next) => {
     const stadiumId = req.params.stadiumid;
@@ -60,8 +75,8 @@ export const getSeat = async (req, res, next) => {
 
 export const getSeats = async (req, res, next) => {
     try{
-        const allSeats = await Seat.find()
-        res.status(200).json(allSeats)
+        const seats = await Seat.find()
+        res.status(200).json(seats)
     } catch (error) {
         next(error)
     }
