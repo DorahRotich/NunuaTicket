@@ -11,31 +11,19 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Hotel = () => {
+  const location = useLocation();
+  console.log(location)
+  const id = location.pathname.split("/")[2];
+  console.log(id)
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
-  const photos = [
-    {
-      src: "https://i.pinimg.com/474x/2e/57/a8/2e57a8904eca15dfa7eb3619b4009b45.jpg",
-    },
-    {
-      src: "https://i.pinimg.com/474x/12/7b/c2/127bc2bbcfabf83e071bd29fa7e6d96b.jpg",
-    },
-    {
-      src: "https://i.pinimg.com/474x/53/68/09/5368096abbb6b4bb8b9d24bfe8547a93.jpg",
-    },
-    {
-      src: "https://i.pinimg.com/474x/24/b4/ec/24b4ecbab46c9712190a48cbe8a79386.jpg",
-    },
-    {
-      src: "https://i.pinimg.com/474x/8f/f8/38/8ff8388938e85c7c59ace2dd8875161b.jpg",
-    },
-    {
-      src: "https://i.pinimg.com/474x/d2/f8/46/d2f8464a29134162f9655dbc24ea74f0.jpg",
-    },
-  ];
+  const { data, loading, error } = useFetch(`http://localhost:8080/api/stadium/find/${id}`);
+  console.log(data)
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -58,6 +46,9 @@ const Hotel = () => {
     <div>
       <Navbar />
       <Header type="list" />
+      {loading ? (
+        "loading please wait"
+      ) : (
       <div className="hotelContainer">
         {open && (
           <div className="slider">
@@ -72,7 +63,11 @@ const Hotel = () => {
               onClick={() => handleMove("l")}
             />
             <div className="sliderWrapper">
-              <img src={photos[slideNumber].src} alt="" className="sliderImg" />
+            <img
+                  src={data.photos[slideNumber]}
+                  alt=""
+                  className="sliderImg"
+                />
             </div>
             <FontAwesomeIcon
               icon={faCircleArrowRight}
@@ -83,23 +78,23 @@ const Hotel = () => {
         )}
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle">Nyayo staium</h1>
+          <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>Mombasa road Nairobi</span>
+            <span>{data.type}</span>
           </div>
           <span className="hotelDistance">
-            Excellent location 3000 seats
+            Excellent location {data.city}
           </span>
           <span className="hotelPriceHighlight">
-            Book a seat here and get free child seat
+            Book a seat here over {data.cheapestSeat} and get free child seat
           </span>
           <div className="hotelImages">
-            {photos.map((photo, i) => (
+            {data.photos?.map((photo, i) => (
               <div className="hotelImgWrapper" key={i}>
                 <img
                   onClick={() => handleOpen(i)}
-                  src={photo.src}
+                  src={photo}
                   alt=""
                   className="hotelImg"
                 />
@@ -108,16 +103,9 @@ const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">Watch a match in th heart of the city</h1>
+              <h1 className="hotelTitle">{data.type}</h1>
               <p className="hotelDesc">
-              Nyayo National Stadium is a multi-purpose stadium in Nairobi, Kenya. 
-              It is located at the square of Mombasa Road, Langata Road and the Aerodrome Road. 
-              It is approximately two kilometers from the City Center, directly opposite Nairobi Mega Mall, formerly known as Nakumatt Mega. The stadium was built in 1983 for a capacity of 15,000.
-              It is currently used mostly for football matches.
-              The popular AFC Leopards football club plays most of its home games at Nyayo stadium. 
-              The stadium is also used for athletics , swimming and various ceremonies most common of which are National Holiday celebrations. 
-              Other facilities at the Nyayo Stadium include a gymnasium and a 50-metre swimming pool. 
-              Rugby union club Mwamba RFC used the Nyayo National Stadium for home games. 
+              {data.MatchDescription}
               </p>
             </div>
             <div className="hotelDetailsPrice">
@@ -136,6 +124,7 @@ const Hotel = () => {
         <MailList />
         <Footer />
       </div>
+      )}
     </div>
   );
 };
