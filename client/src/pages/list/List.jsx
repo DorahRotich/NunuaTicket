@@ -18,7 +18,7 @@ const List = () => {
   const [max, setMax] = useState(undefined);
 
   const {data, loading, error, reFetch } = useFetch(
-    `stadium?city=${destination}&min=${min || 0 }&max=${max || 999}`
+    `http://localhost:8080/api/stadium?min=${min || 0 }&max=${max || 999}${destination? `&city=${destination}`:""}`
     
   )
   console.log(data)
@@ -109,7 +109,7 @@ const List = () => {
           </div>
           <div className="listResult">
           {loading ? (
-              "loading"
+              "loading please wait"
             ) : (
               <>
                 {data.map((item) => (
