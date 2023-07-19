@@ -14,11 +14,11 @@ const SearchItem = ({item}) => {
           Stadium seat
         </span>
         <span className="siFeatures">
-          {item.city}
+          {item.type}
         </span>
         <span className="siCancelOp">Free cancellation </span>
         <span className="siCancelOpSubtitle">
-          You can cancel later, so lock in this great price today!
+          You can cancel later, so lock in this great y!
         </span>
       </div>
       <div className="siDetails">
