@@ -95,3 +95,15 @@ export const countbyType = async (req, res, next) => {
         next(error)
     }
 };
+
+export const getStadiumSeats = async (req, res, next) => {
+    try {
+        const stadium = await Stadium.findById(req.params.id);
+        const list = await Promise.all(stadium.seats.map((seat) => {
+            return Seat.findById(seat);
+        }));
+        res.status(200).json(list);
+    } catch (error) {
+        next(error);
+    }
+};
