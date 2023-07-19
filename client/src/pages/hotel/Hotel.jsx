@@ -81,13 +81,13 @@ const Hotel = () => {
           <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>{data.type}</span>
+            <span>{data.city}</span>
           </div>
           <span className="hotelDistance">
-            Excellent location {data.city}
+            Excellent location in {data.city}
           </span>
           <span className="hotelPriceHighlight">
-            Book a seat here over {data.cheapestSeat} and get free child seat
+            Book a seat here over {data.cheapestSeat} shillings and get free child seat
           </span>
           <div className="hotelImages">
             {data.photos?.map((photo, i) => (
@@ -115,7 +115,7 @@ const Hotel = () => {
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>$50</b> (one adult seat)
+                <b>{data.cheapestSeat} $ </b> (one adult seat)
               </h2>
               <button>Reserve or Book Now!</button>
             </div>
