@@ -9,7 +9,15 @@ const seatSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    seatNumber: [{number: Number, unavailableDates: {type: [Date]} }],
+    maxPeople: {
+        type: Number,
+        required: true,
+      },
+      desc: {
+        type: String,
+        required: true,
+      },
+    seatNumbers: [{number: Number, unavailableDates: {type: [Date]} }],
 }, { timestamps: true }
 );
 
