@@ -32,23 +32,32 @@ export const deleteStadium = async (req, res, next) => {
     }
 }
 
-export const getStadium = async (req, res, next) => {
-    const { min, max, ...others } = req.query;
+export const getStadiums = async (req, res, next) => {
+    const { min, max, limit, ...others } = req.query;
+    console.log(req.query)
     try {
-        const stadium = await Stadium.find({
+        const allStadiums = await Stadium.find({
         ...others,
-        cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+        cheapestSeat: { $gt: min | 1, $lt: max || 999 },
         }).limit(req.query.limit);
-        res.status(200).json(stadium)
+        res.status(200).json(allStadiums)
+        console.log(allStadiums)
     } catch (error) {
         next(error)
     }
+    // try{
+    //     const allStadiums = await Stadium.find()
+    //     res.status(200).json(allStadiums)
+    // } catch (error) {
+    //     next(error)
+    // }
 }
 
-export const getStadiums = async (req, res, next) => {
+export const getStadium = async (req, res, next) => {
+    // const id = req.params.id;
     try{
-        const allStadiums = await Stadium.find(req.params.id)
-        res.status(200).json(allStadiums)
+        const stadium = await Stadium.findById(req.params.id)
+        res.status(200).json(stadium)
     } catch (error) {
         next(error)
     }
