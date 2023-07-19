@@ -10,20 +10,36 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation, useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Reserve from "../../components/reserve/Reserve";
+
 
 const Hotel = () => {
   const location = useLocation();
-  console.log(location)
   const id = location.pathname.split("/")[2];
-  console.log(id)
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const { data, loading, error } = useFetch(`http://localhost:8080/api/stadium/find/${id}`);
-  console.log(data)
+  const { data, loading, error } = useFetch(`/stadium/find/${id}`);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { dates } = useContext(SearchContext);
+
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -40,6 +56,13 @@ const Hotel = () => {
     }
 
     setSlideNumber(newSlideNumber)
+  };
+  const handleClick = () => {
+    if (user) {
+      setOpenModal(true);
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -81,13 +104,13 @@ const Hotel = () => {
           <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>{data.city}</span>
+            <span>{data.type}</span>
           </div>
           <span className="hotelDistance">
-            Excellent location in {data.city}
+            Excellent location {data.city}
           </span>
           <span className="hotelPriceHighlight">
-            Book a seat here over {data.cheapestSeat} shillings and get free child seat
+            Book a seat here over {data.cheapestSeat} and get free child seat
           </span>
           <div className="hotelImages">
             {data.photos?.map((photo, i) => (
@@ -111,13 +134,15 @@ const Hotel = () => {
             <div className="hotelDetailsPrice">
               <h1>Perfect for watching matches!</h1>
               <span>
-                Located in the real heart of Nairobi, this property has an
-                excellent location score of 9.8!
+                Located in the real heart of Nairobi, this position has an
+                excellent position score of 9.8!
               </span>
               <h2>
-                <b>{data.cheapestSeat} $ </b> (one adult seat)
+              <b>${data.cheapestSeat}</b>
+                  (per Adult)
+
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleClick}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>
@@ -125,6 +150,7 @@ const Hotel = () => {
         <Footer />
       </div>
       )}
+      {openModal && <Reserve setOpen={setOpenModal} stadiumId={id}/>}
     </div>
   );
 };
