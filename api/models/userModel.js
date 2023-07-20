@@ -20,6 +20,18 @@ const userSchema = new mongoose.Schema(
         type: Boolean,
         default: false
     },
+    country: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    phone: {
+        type: String
+    },
+    photos: {
+        type: String
+    }
 }, 
 { timestamps: true }
 );
