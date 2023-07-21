@@ -101,16 +101,16 @@ const Hotel = () => {
         )}
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle">{data.name}</h1>
+          <h1 className="hotelTitle">{data.MatchDescription}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
-            <span>{data.type}</span>
+            <span>{data.city}</span>
           </div>
           <span className="hotelDistance">
-            Excellent location {data.city}
+            Excellent location in {data.city}
           </span>
           <span className="hotelPriceHighlight">
-            Book a seat here over {data.cheapestSeat} and get free child seat
+            Book a seat here over {data.cheapestSeat} shillings and get free child seat
           </span>
           <div className="hotelImages">
             {data.photos?.map((photo, i) => (
@@ -126,7 +126,7 @@ const Hotel = () => {
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">{data.type}</h1>
+              <h1 className="hotelTitle">{data.name}</h1>
               <p className="hotelDesc">
               {data.MatchDescription}
               </p>
@@ -139,7 +139,8 @@ const Hotel = () => {
               </span>
               <h2>
               <b>${data.cheapestSeat}</b>
-                  (per Adult)
+                  Price per adult
+
 
               </h2>
               <button onClick={handleClick}>Reserve or Book Now!</button>

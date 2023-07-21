@@ -10,8 +10,20 @@ const userSchema = new mongoose.Schema(
     email: {
         type: String,
         required: true,
-        unique: true
-    },
+        unique: true,
+      },
+      country: {
+        type: String,
+      },
+      img: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
     password: {
         type: String,
         required: true
@@ -20,18 +32,6 @@ const userSchema = new mongoose.Schema(
         type: Boolean,
         default: false
     },
-    country: {
-        type: String
-    },
-    city: {
-        type: String
-    },
-    phone: {
-        type: String
-    },
-    photos: {
-        type: String
-    }
 }, 
 { timestamps: true }
 );

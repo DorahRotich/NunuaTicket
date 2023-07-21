@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, stadiumId }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const { data, loading, error } = useFetch(`/stadiums/seat/${stadiumId}`);
+  const { data, loading, error } = useFetch(`http://localhost:8080/api/stadium/seat/${stadiumId}`);
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -73,7 +73,7 @@ const Reserve = ({ setOpen, stadiumId }) => {
           className="rClose"
           onClick={() => setOpen(false)}
         />
-        <span>Select your rooms:</span>
+        <span>Select your seats:</span>
         {data.map((item) => (
           <div className="rItem" key={item._id}>
             <div className="rItemInfo">
@@ -82,12 +82,14 @@ const Reserve = ({ setOpen, stadiumId }) => {
               <div className="rMax">
                 Max people: <b>{item.maxPeople}</b>
               </div>
-              <div className="rPrice">{item.price}</div>
+              <div className="rPrice">
+              Price : <b>{item.price}</b>
+              </div>
             </div>
             <div className="rSelectSeats">
               {item.seatNumbers.map((seatNumber) => (
                 <div className="seat">
-                  <label>{seatNumber.number}</label>
+                  <label> seat number {seatNumber.number}</label>
                   <input
                     type="checkbox"
                     value={seatNumber._id}
@@ -100,7 +102,7 @@ const Reserve = ({ setOpen, stadiumId }) => {
           </div>
         ))}
         <button onClick={handleClick} className="rButton">
-          Reserve Now!
+          Click to Reserve Now!
         </button>
       </div>
     </div>
